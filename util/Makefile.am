@@ -16,7 +16,7 @@ AM_CPPFLAGS = \
 	@HEADER_SEARCH_PATH@ \
 	-DETCDIR=\"sysconfdir\" -DDATADIR=\"pkgdatadir\"
 
-liblist= @LIBRARY_SEARCH_PATH@ @INTLIBS@
+liblist= @LIBRARY_SEARCH_PATH@ @INTLIBS@ @XLIBS@
 
 wdwrite_LDADD = $(top_builddir)/WINGs/libWUtil.la $(liblist)
 
