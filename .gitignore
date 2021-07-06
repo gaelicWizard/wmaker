@@ -134,3 +134,12 @@ WindowMaker/IconSets/Default.iconset
 *~
 
 .pc
+/doc/wmaker.1
+/doc/wmsetbg.1
+/src/misc.hack_nf.c
+/src/xmodifier.hack_nf.c
+/test-install-root
+/WindowMaker/appearance.menu.fy
+/WindowMaker/appearance.menu.nl
+/wmlib/wmlib.pc
+BUILD_INSTALL_ROOT
