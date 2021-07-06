@@ -116,7 +116,7 @@
  */
 
 /* list of paths to look for the config files, searched in order of appearance */
-#define DEF_CONFIG_PATH	"~/GNUstep/Library/WindowMaker"
+#define DEF_CONFIG_PATH	"~/Library/Application Support/WindowMaker"
 #define DEF_CONFIG_PATHS DEF_CONFIG_PATH":"PKGDATADIR
 #define DEF_MENU_FILE	 "menu"
 
