@@ -40,7 +40,11 @@ char *WMUserDefaultsDidChangeNotification = "WMUserDefaultsDidChangeNotification
 
 static void synchronizeUserDefaults(void *foo);
 
-#define DEFAULTS_DIR "/Defaults"
+#ifndef DEFAULTS_DIR
+#define GSDEFAULTS_DIR "GNUstep/Defaults"
+#define DEFAULTS_DIR "Defaults"
+#define GSUSER_DIR "GNUstep"
+#endif
 #ifndef HAVE_INOTIFY
 /* Check defaults database for changes every this many milliseconds */
 /* XXX: this is shared with src/ stuff, put it in some common header */
@@ -49,10 +53,8 @@ static void synchronizeUserDefaults(void *foo);
 
 const char *wusergnusteppath()
 {
-	static const char subdir[] = "/GNUstep";
 	static char *path = NULL;
-	char *gspath, *h;
-	int pathlen;
+	char *gspath, *homedir;
 
 	if (path)
 		/* Value have been already computed, re-use it */
@@ -68,14 +70,11 @@ const char *wusergnusteppath()
 		wwarning(_("variable WMAKER_USER_ROOT defined with invalid path, not used"));
 	}
 
-	h = wgethomedir();
-	if (!h)
+	homedir = wgethomedir();
+	if (!homedir)
 		return NULL;
 
-	pathlen = strlen(h);
-	path = wmalloc(pathlen + sizeof(subdir));
-	strcpy(path, h);
-	strcpy(path + pathlen, subdir);
+	path = wstrappend(wstrconcat(homedir, "/"), GSUSER_DIR);
 
 	return path;
 }
@@ -83,17 +82,26 @@ const char *wusergnusteppath()
 char *wdefaultspathfordomain(const char *domain)
 {
 	char *path;
-	const char *gspath;
-	size_t slen;
+	const char *homedir, *udefpath;
 
-	gspath = wusergnusteppath();
-	slen = strlen(gspath) + strlen(DEFAULTS_DIR) + strlen(domain) + 4;
-	path = wmalloc(slen);
+	homedir = wgethomedir();
+	if (!homedir)
+		return NULL;
 
-	strcpy(path, gspath);
-	strcat(path, DEFAULTS_DIR);
-	strcat(path, "/");
-	strcat(path, domain);
+	udefpath = GETENV("GNUSTEP_USER_DEFAULTS_DIR");
+	if (udefpath) {
+		udefpath = wexpandpath(wstrappend(wstrconcat(homedir, "/"), udefpath));
+
+		if (!udefpath) {
+			wwarning(_("variable GNUSTEP_USER_DEFAULTS_DIR defined with invalid path, not used"));
+		}
+	} else if (GETENV("WMAKER_USER_ROOT")) {
+		udefpath = wexpandpath(wstrappend(wstrconcat(wusergnusteppath(), "/"), DEFAULTS_DIR));
+	} else {
+		udefpath = wexpandpath(wstrappend(wstrconcat(homedir, "/"), GSDEFAULTS_DIR));
+	}
+
+	path = wstrappend(wstrconcat(udefpath, "/"), domain);
 
 	return path;
 }
