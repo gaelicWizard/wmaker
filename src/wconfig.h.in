@@ -137,9 +137,9 @@
 /* pixmap path */
 #define DEF_PIXMAP_PATHS \
 	"("                                                        \
-		"\"DEF_CONFIG_PATH"/Pixmaps\","       \
-		"\"DEF_CONFIG_PATH"/Backgrounds\","   \
-		"\"DEF_CONFIG_PATH"/CachedPixmaps\"," \
+		"\""DEF_CONFIG_PATH"/Pixmaps\","       \
+		"\""DEF_CONFIG_PATH"/Backgrounds\","   \
+		"\""DEF_CONFIG_PATH"/CachedPixmaps\"," \
 		"\"~/pixmaps\","                                   \
 		"\""PKGDATADIR"/Pixmaps\","                        \
 		"\""PKGDATADIR"/Backgrounds\","                    \
@@ -156,8 +156,8 @@
 #define DEF_ICON_PATHS \
 	"("                                                        \
 		"\"~/Library/Icons\","                     \
-		"\"DEF_CONFIG_PATH"/Pixmaps\","       \
-		"\"DEF_CONFIG_PATH"/CachedPixmaps\"," \
+		"\""DEF_CONFIG_PATH"/Pixmaps\","       \
+		"\""DEF_CONFIG_PATH"/CachedPixmaps\"," \
 		"\"~/pixmaps\","                                   \
 		"\""PKGDATADIR"/Icons\","                          \
 		"\""PKGDATADIR"/Pixmaps\","                        \
