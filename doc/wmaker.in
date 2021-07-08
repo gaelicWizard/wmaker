@@ -145,15 +145,15 @@ specifies the home-relative location of the user's Defaults directory.
 The path is appended to $HOME. If the environment is not set, it defaults
 to 'GNUstep/Defaults'
 .IP GNUSTEP_USER_APPS
-specifies the location of the user's GNUstep Applications directory. If this
+specifies the location of the user's GNUstep Apps directory. If this
 variable is empty, it defaults to ~/GNUstep/Applications.
 .IP GNUSTEP_LOCAL_APPS
-specifies the location of the system-wide \fBlocal\fP GNUstep
+specifies the location of the system-wide \fBlocal\fP GNUstep Apps
 directory (this is useful, for example, in those cases where the
 system-wide location is really a network wide location). If this
 variable is empty, it defaults to /usr/local/GNUstep/Local/Applications.
 .IP GNUSTEP_SYSTEM_APPS
-specifies the location of the system-wide GNUstep directory. If this
+specifies the location of the system-wide GNUstep Apps directory. If this
 variable is empty, it defaults to /usr/GNUstep/System/Applications.
 .SH SEE ALSO
 The Window Maker User Guide
