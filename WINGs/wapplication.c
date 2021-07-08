@@ -150,9 +150,9 @@ char *WMPathForResourceOfType(const char *resource, const char *ext)
 	 * - GNUSTEP_USER_APPS/ApplicationName.app/ext
 	 * - WMAKER_USER_ROOT/Applications/ApplicationName.app/ext
 	 * - GNUSTEP_LOCAL_APPS/ApplicationName.app/ext
-	 * - /usr/local/GNUstep/Applications/ApplicationName.app/ext
+	 * - /usr/local/lib/GNUstep/Applications/ApplicationName.app/ext
 	 * - GNUSTEP_SYSTEM_APPS/ApplicationName.app/ext
-	 * - /usr/GNUstep/System/Applications/ApplicationName.app/ext
+	 * - /usr/lib/GNUstep/Applications/ApplicationName.app/ext
 	 */
 
 	if (WMApplication.resourcePath) {
