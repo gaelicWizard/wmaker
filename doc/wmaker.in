@@ -140,13 +140,13 @@ Guess... ;-)
 specifies the initial path for the Defaults directory. "Defaults/" is
 appended to this variable to determine the actual location of the
 databases. If the variable is not set, it defaults to "~/GNUstep".
-.IP GNUSTEP_USER_APPS
-specifies the location of the user's GNUstep Applications directory. If this
-variable is empty, it defaults to ~/GNUstep/Applications.
 .IP GNUSTEP_USER_DEFAULTS_DIR
 specifies the home-relative location of the user's Defaults directory.
 The path is appended to $HOME. If the environment is not set, it defaults
 to 'GNUstep/Defaults'
+.IP GNUSTEP_USER_APPS
+specifies the location of the user's GNUstep Applications directory. If this
+variable is empty, it defaults to ~/GNUstep/Applications.
 .IP GNUSTEP_LOCAL_APPS
 specifies the location of the system-wide \fBlocal\fP GNUstep
 directory (this is useful, for example, in those cases where the
