@@ -151,10 +151,10 @@ to 'GNUstep/Defaults'
 specifies the location of the system-wide \fBlocal\fP GNUstep
 directory (this is useful, for example, in those cases where the
 system-wide location is really a network wide location). If this
-variable is empty, it defaults to /etc/GNUstep/Local/Applications.
+variable is empty, it defaults to /usr/local/GNUstep/Local/Applications.
 .IP GNUSTEP_SYSTEM_APPS
 specifies the location of the system-wide GNUstep directory. If this
-variable is empty, it defaults to /etc/GNUstep/System/Applications.
+variable is empty, it defaults to /usr/GNUstep/System/Applications.
 .SH SEE ALSO
 The Window Maker User Guide
 .PP
