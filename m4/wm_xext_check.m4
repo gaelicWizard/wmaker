@@ -29,8 +29,8 @@
 # the variable 'supported_xext'
 # When not found, append info to variable 'unsupported'
 AC_DEFUN_ONCE([WM_XEXT_CHECK_XSHAPE],
-[WM_LIB_CHECK([XShape], [-lXext], [XShapeSelectInput], [$XLIBS],
-    [wm_save_CFLAGS="$CFLAGS"
+[WM_LIB_CHECK([XShape], [-lXext], [XShapeSelectInput], [$XLFLAGS $XLIBS],
+    [wm_save_CFLAGS="$CFLAGS $XCFLAGS"
      AS_IF([wm_fn_lib_try_compile "X11/extensions/shape.h" "Window win;" "XShapeSelectInput(NULL, win, 0)" ""],
         [],
         [AC_MSG_ERROR([found $CACHEVAR but cannot compile using XShape header])])
@@ -52,7 +52,7 @@ AC_DEFUN_ONCE([WM_XEXT_CHECK_XSHAPE],
 # the variable 'supported_xext'
 # When not found, append info to variable 'unsupported'
 AC_DEFUN_ONCE([WM_XEXT_CHECK_XSHM],
-[WM_LIB_CHECK([XShm], [-lXext], [XShmAttach], [$XLIBS],
+[WM_LIB_CHECK([XShm], [-lXext], [XShmAttach], [$XLFLAGS $XLIBS],
     [wm_save_CFLAGS="$CFLAGS"
      AC_COMPILE_IFELSE([AC_LANG_PROGRAM([dnl
 @%:@include <X11/Xlib.h>
@@ -86,14 +86,14 @@ AC_DEFUN_ONCE([WM_EXT_CHECK_XMU],
     [wm_cv_xext_xmu=no
      dnl
      dnl We check that the library is available
-     wm_save_LIBS="$LIBS"
+     wm_save_LIBS="$LIBS $XLFLAGS"
      AS_IF([wm_fn_lib_try_link "XmuLookupStandardColormap" "-lXmu"],
          [wm_cv_xext_xmu="-lXmu"])
      LIBS="$wm_save_LIBS"
      AS_IF([test "x$wm_cv_xext_xmu" != "xno"],
        [dnl
        dnl A library was found, check if header is available and compile
-       wm_save_CFLAGS="$CFLAGS"
+       wm_save_CFLAGS="$CFLAGS $XCFLAGS"
        AC_COMPILE_IFELSE([AC_LANG_PROGRAM([dnl
 @%:@include <X11/Xlib.h>
 @%:@include <X11/Xutil.h>
