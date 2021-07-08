@@ -13,12 +13,6 @@
 #include "WINGsP.h"
 #include "userdefaults.h"
 
-#ifdef HAVE_SECURE_GETENV
-#define GETENV(x) secure_getenv((x))
-#else
-#define GETENV(x) getenv((x))
-#endif
-
 
 typedef struct W_UserDefaults {
 	WMPropList *defaults;
