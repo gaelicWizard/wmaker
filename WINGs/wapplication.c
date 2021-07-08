@@ -181,7 +181,7 @@ char *WMPathForResourceOfType(const char *resource, const char *ext)
 
 	gsuserapps = GETENV("GNUSTEP_USER_APPS");
 	if (!gsuserapps)
-		gsuserapps = wstrappend(wusergnusteppath(), "/Applications");
+		gsuserapps = wstrconcat(wusergnusteppath(), "/Applications");
 	gslocapps = GETENV("GNUSTEP_LOCAL_APPS");
 	if (!gslocapps)
 		gslocapps = "/usr/local/lib/GNUstep/Applications";
