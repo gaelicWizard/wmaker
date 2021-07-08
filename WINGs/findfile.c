@@ -38,12 +38,6 @@
 #define PATH_MAX  1024
 #endif
 
-#ifdef HAVE_SECURE_GETENV
-#define GETENV(x) secure_getenv((x))
-#else
-#define GETENV(x) getenv((x))
-#endif
-
 
 char *wgethomedir()
 {
