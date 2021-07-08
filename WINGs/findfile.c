@@ -39,7 +39,7 @@
 #endif
 
 #ifdef HAVE_SECURE_GETENV
-#define GETENV(x) secure_getenv((x));
+#define GETENV(x) secure_getenv((x))
 #else
 #define GETENV(x) getenv((x))
 #endif
