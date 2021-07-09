@@ -80,6 +80,32 @@ gsuserout:
 	return path;
 }
 
+const char *wuserlibrarypath()
+{
+	static char *path = NULL;
+	char *gspath, *libpath;
+
+	if (path)
+		goto gslibout;
+
+	libpath = GETENV("GNUSTEP_USER_LIBRARY");
+	if (libpath) {
+		libpath = wexpandpath(gspath);
+		if (libpath) {
+			path = libpath;
+			goto gslibout;
+		}
+		wwarning(_("variable GNUSTEP_USER_LIBRARY defined with invalid path, not used"));
+	}
+
+	libpath = wexpandpath(wstrappend(wstrconcat(wusergnusteppath(), "/"), "Library"));
+	if (libpath)
+		path = libpath;
+
+gslibout:
+	return path;
+}
+
 char *wdefaultspathfordomain(const char *domain)
 {
 	char *path = NULL;
