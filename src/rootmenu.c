@@ -883,7 +883,7 @@ static WMenuEntry *addMenuEntry(WMenu *menu, const char *title, const char *shor
 			WMenu *dummy;
 			char *path;
 
-			path = wfindfile(DEF_CONFIG_PATHS, params);
+			path = wfindfile(DEF_DATA_PATHS, params);
 			if (!path) {
 				path = wstrdup(params);
 			}
@@ -900,7 +900,7 @@ static WMenuEntry *addMenuEntry(WMenu *menu, const char *title, const char *shor
 			WMenu *dummy;
 			char *path;
 
-			path = wfindfile(DEF_CONFIG_PATHS, params);
+			path = wfindfile(DEF_DATA_PATHS, params);
 			if (!path)
 				path = wstrdup(params);
 
@@ -1063,7 +1063,7 @@ static WMenu *readMenu(WScreen *scr, const char *flat_file, FILE *file)
 	WMenuParser parser;
 	char *title, *command, *params, *shortcut;
 
-	parser = WMenuParserCreate(flat_file, file, DEF_CONFIG_PATHS);
+	parser = WMenuParserCreate(flat_file, file, DEF_DATA_PATHS);
 	menu_parser_register_macros(parser);
 
 	while (WMenuParserGetLine(parser, &title, &command, &params, &shortcut)) {
@@ -1490,10 +1490,10 @@ WMenu *configureMenu(WScreen *scr, WMPropList *definition)
 		path = getLocalizedMenuFile(tmp);
 
 		if (!path)
-			path = wfindfile(DEF_CONFIG_PATHS, tmp);
+			path = wfindfile(DEF_DATA_PATHS, tmp);
 
 		if (!path) {
-			path = wfindfile(DEF_CONFIG_PATHS, DEF_MENU_FILE);
+			path = wfindfile(DEF_DATA_PATHS, DEF_MENU_FILE);
 			menu_is_default = True;
 		}
 

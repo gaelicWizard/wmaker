@@ -510,8 +510,8 @@ static void execInitScript(void)
 {
 	char *file, *paths;
 
-	paths = wstrconcat(wusergnusteppath(), "/Library/WindowMaker");
-	paths = wstrappend(paths, ":" DEF_CONFIG_PATHS);
+	paths = wstrconcat(wusergnusteppath(), "/"DEF_DATA_SUBDIR);
+	paths = wstrappend(paths, ":" DEF_DATA_PATHS);
 
 	file = wfindfile(paths, DEF_INIT_SCRIPT);
 	wfree(paths);
@@ -528,8 +528,8 @@ void ExecExitScript(void)
 {
 	char *file, *paths;
 
-	paths = wstrconcat(wusergnusteppath(), "/Library/WindowMaker");
-	paths = wstrappend(paths, ":" DEF_CONFIG_PATHS);
+	paths = wstrconcat(wusergnusteppath(), "/"DEF_DATA_SUBDIR);
+	paths = wstrappend(paths, ":" DEF_DATA_PATHS);
 
 	file = wfindfile(paths, DEF_EXIT_SCRIPT);
 	wfree(paths);

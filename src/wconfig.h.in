@@ -116,7 +116,9 @@
  */
 
 /* list of paths to look for the config files, searched in order of appearance */
-#define DEF_CONFIG_PATHS "~/GNUstep/Library/WindowMaker:"PKGDATADIR
+#define DEF_DATA_SUBDIR	"Library/"PACKAGE
+#define DEF_DATA_PATH	"~/GNUstep/"DEF_DATA_SUBDIR
+#define DEF_DATA_PATHS DEF_DATA_PATH":"PKGDATADIR
 #define DEF_MENU_FILE	 "menu"
 
 /* name of the script to execute at startup */
@@ -136,9 +138,9 @@
 /* pixmap path */
 #define DEF_PIXMAP_PATHS \
 	"("                                                        \
-		"\"~/GNUstep/Library/WindowMaker/Pixmaps\","       \
-		"\"~/GNUstep/Library/WindowMaker/Backgrounds\","   \
-		"\"~/GNUstep/Library/WindowMaker/CachedPixmaps\"," \
+		"\""DEF_DATA_PATH"/Pixmaps\","       \
+		"\""DEF_DATA_PATH"/Backgrounds\","   \
+		"\""DEF_DATA_PATH"/CachedPixmaps\"," \
 		"\"~/pixmaps\","                                   \
 		"\""PKGDATADIR"/Pixmaps\","                        \
 		"\""PKGDATADIR"/Backgrounds\","                    \
@@ -148,15 +150,15 @@
 #ifdef USER_MENU
 #define GLOBAL_USER_MENU_PATH PKGDATADIR"/UserMenus"
 #define DEF_USER_MENU_PATHS \
-    "~/GNUstep/Library/WindowMaker/UserMenus:"GLOBAL_USER_MENU_PATH
+    DEF_DATA_PATH"/UserMenus:"GLOBAL_USER_MENU_PATH
 #endif
 
 /* icon path */
 #define DEF_ICON_PATHS \
 	"("                                                        \
-		"\"~/GNUstep/Library/Icons\","                     \
-		"\"~/GNUstep/Library/WindowMaker/Pixmaps\","       \
-		"\"~/GNUstep/Library/WindowMaker/CachedPixmaps\"," \
+		"\"~/Library/Icons\","                     \
+		"\""DEF_DATA_PATH"/Pixmaps\","       \
+		"\""DEF_DATA_PATH"/CachedPixmaps\"," \
 		"\"~/pixmaps\","                                   \
 		"\""PKGDATADIR"/Icons\","                          \
 		"\""PKGDATADIR"/Pixmaps\","                        \
