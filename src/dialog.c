@@ -182,8 +182,10 @@ static char *HistoryFileName(const char *name)
 {
 	char *filename = NULL;
 
-	filename = wstrdup(wusergnusteppath());
-	filename = wstrappend(filename, "/.AppInfo/WindowMaker/History");
+	filename = wstrdup(getenv("XDG_STATE_HOME"));
+	if (!filename)
+		filename = "~/.local/state"
+	filename = wstrappend(wexpandpath(filename), "/WindowMaker/History");
 	if (name && strlen(name)) {
 		filename = wstrappend(filename, ".");
 		filename = wstrappend(filename, name);
