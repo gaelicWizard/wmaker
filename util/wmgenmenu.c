@@ -44,9 +44,9 @@ int main(int argc, char *argv[])
 	char *tmp, *theme_paths, *style_paths, *icon_paths;
 
 	tmp = wstrconcat("-noext ", PKGDATADIR);
-	theme_paths = wstrconcat(tmp, "/Themes $HOME/GNUstep/Library/WindowMaker/Themes WITH setstyle");
-	style_paths = wstrconcat(tmp, "/Styles $HOME/GNUstep/Library/WindowMaker/Styles WITH setstyle");
-	icon_paths = wstrconcat(tmp, "/IconSets $HOME/GNUstep/Library/WindowMaker/IconSets WITH seticons");
+	theme_paths = wstrconcat(tmp, "/Themes $HOME/GNUstep/"DEF_DATA_SUBDIR"/Themes WITH setstyle");
+	style_paths = wstrconcat(tmp, "/Styles $HOME/GNUstep/"DEF_DATA_SUBDIR"/Styles WITH setstyle");
+	icon_paths = wstrconcat(tmp, "/IconSets $HOME/GNUstep/"DEF_DATA_SUBDIR"/IconSets WITH seticons");
 
 	struct option longopts[] = {
 		{ "version",		no_argument,	NULL,	'v' },
@@ -245,7 +245,7 @@ int main(int argc, char *argv[])
 	L3Menu = WMCreatePLArray(
 		WMCreatePLString(_("Images")),
 		WMCreatePLString("OPEN_MENU"),
-		WMCreatePLString("-noext $HOME/GNUstep/Library/WindowMaker/Backgrounds WITH wmsetbg -u -t"),
+		WMCreatePLString("-noext $HOME/GNUstep/"DEF_DATA_SUBDIR"/Backgrounds WITH wmsetbg -u -t"),
 		NULL
 	);
 	WMAddToPLArray(L2Menu, L3Menu);
@@ -265,7 +265,7 @@ int main(int argc, char *argv[])
 	L2Menu = WMCreatePLArray(
 		WMCreatePLString(_("Save IconSet")),
 		WMCreatePLString("SHEXEC"),
-		WMCreatePLString("geticonset $HOME/GNUstep/Library/WindowMaker/IconSets/"
+		WMCreatePLString("geticonset $HOME/GNUstep/"DEF_DATA_SUBDIR"/IconSets/"
 			"\"%a(IconSet name,Name to save icon set as)\""),
 		NULL
 	);
