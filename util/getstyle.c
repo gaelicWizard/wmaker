@@ -176,7 +176,7 @@ static void findCopyFile(const char *dir, const char *file)
 }
 
 
-#define THEME_SUBPATH "/"DEF_DATA_SUBDIR"/Themes/"
+#define THEME_SUBPATH PKGDATA_SUBDIR"/Themes"
 #define THEME_EXTDIR  ".themed/"
 
 static void makeThemePack(WMPropList * style, const char *themeName)
@@ -192,10 +192,10 @@ static void makeThemePack(WMPropList * style, const char *themeName)
 	user_library = wuserdatapath();
 	if (user_library == NULL)
 		return;
-	themeNameLen = strlen(user_library) + sizeof(THEME_SUBPATH) + strlen(themeName) + sizeof(THEME_EXTDIR) + 1;
+	themeNameLen = strlen(user_library) + sizeof(THEME_SUBPATH) + strlen(themeName) + sizeof(THEME_EXTDIR) + 3;
 	themeDir = wmalloc(themeNameLen);
 	snprintf(themeDir, themeNameLen,
-	         "%s" THEME_SUBPATH "%s" THEME_EXTDIR,
+	         "%s/" THEME_SUBPATH "/%s" THEME_EXTDIR,
 	         user_library, themeName);
 	ThemePath = themeDir;
 
