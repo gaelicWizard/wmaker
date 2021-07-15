@@ -40,7 +40,6 @@ char *WMUserDefaultsDidChangeNotification = "WMUserDefaultsDidChangeNotification
 
 static void synchronizeUserDefaults(void *foo);
 
-#define DEFAULTS_DIR "/Defaults"
 #ifndef HAVE_INOTIFY
 /* Check defaults database for changes every this many milliseconds */
 /* XXX: this is shared with src/ stuff, put it in some common header */
@@ -49,33 +48,23 @@ static void synchronizeUserDefaults(void *foo);
 
 const char *wusergnusteppath()
 {
-	static const char subdir[] = "/GNUstep";
 	static char *path = NULL;
-	char *gspath, *h;
-	int pathlen;
+	char *gspath;
 
 	if (path)
 		/* Value have been already computed, re-use it */
 		return path;
 
-	gspath = GETENV("WMAKER_USER_ROOT");
-	if (gspath) {
-		gspath = wexpandpath(gspath);
-		if (gspath) {
-			path = gspath;
-			return path;
+	if ((gspath = GETENV("WMAKER_USER_ROOT"))) {
+		if ((path = wexpandpath(gspath))) {
+			wwarning(_("variable WMAKER_USER_ROOT is deprecated; use GNUSTEP_USER_DEFAULTS_DIR or XDG_CONFIG_HOME"));
+		} else {
+			wwarning(_("variable WMAKER_USER_ROOT defined with invalid path, not used"));
 		}
-		wwarning(_("variable WMAKER_USER_ROOT defined with invalid path, not used"));
 	}
 
-	h = wgethomedir();
-	if (!h)
-		return NULL;
-
-	pathlen = strlen(h);
-	path = wmalloc(pathlen + sizeof(subdir));
-	strcpy(path, h);
-	strcpy(path + pathlen, subdir);
+	if (!path)
+		path = wexpandpath(GSUSER_DIR);
 
 	return path;
 }
@@ -89,6 +78,18 @@ const char *wuserlibrarypath()
 		/* Value have been already computed, re-use it */
 		return path;
 
+	if ((libpath = GETENV("GNUSTEP_USER_LIBRARY"))) {
+		if (!(path = wexpandpath(libpath))) {
+			wwarning(_("variable GNUSTEP_USER_LIBRARY defined with invalid path, not used"));
+		}
+	}
+
+	if ((!libpath) && (libpath = GETENV("XDG_DATA_HOME"))) {
+		if (!(path = wexpandpath(libpath))) {
+			wwarning(_("variable XDG_DATA_HOME defined with invalid path, not used"));
+		}
+	}
+
 	if (!path)
 		path = wstrappend(wexpandpath(wusergnusteppath()), "/Library");
 
@@ -98,17 +99,25 @@ const char *wuserlibrarypath()
 char *wdefaultspathfordomain(const char *domain)
 {
 	char *path;
-	const char *gspath;
-	size_t slen;
+	static char *udefpath = NULL;
 
-	gspath = wusergnusteppath();
-	slen = strlen(gspath) + strlen(DEFAULTS_DIR) + strlen(domain) + 4;
-	path = wmalloc(slen);
+	if ((!udefpath) && (udefpath = GETENV("GNUSTEP_USER_DEFAULTS_DIR"))) {
+		if (!(udefpath = wstrappend(wexpandpath("~/"), udefpath))) {
+			wwarning(_("variable GNUSTEP_USER_DEFAULTS_DIR defined with invalid path, not used"));
+		}
+	} 
 
-	strcpy(path, gspath);
-	strcat(path, DEFAULTS_DIR);
-	strcat(path, "/");
-	strcat(path, domain);
+	if ((!udefpath) && (udefpath = GETENV("XDG_CONFIG_HOME"))) {
+		if (!(udefpath = wexpandpath(udefpath))) {
+			wwarning(_("variable XDG_CONFIG_HOME defined with invalid path, not used"));
+		}
+	} 
+
+	if (!udefpath) {
+		udefpath = wstrappend(wexpandpath(wusergnusteppath()), DEFAULTS_SUBDIR);
+	}
+
+	path = wstrappend(wstrconcat(udefpath, "/"), domain);
 
 	return path;
 }
