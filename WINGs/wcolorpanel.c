@@ -394,7 +394,7 @@ static WMColorPanel *makeColorPanel(WMScreen * scrPtr, const char *name)
 	panel->mode = WMWheelModeColorPanel;
 	panel->lastChanged = 0;
 	panel->slidersmode = WMRGBModeColorPanel;
-	panel->configurationPath = wstrconcat(wusergnusteppath(), "/Library/Colors/");
+	panel->configurationPath = wstrconcat(wuserlibrarypath(), "/Colors/");
 
 	/* Some General Purpose Widgets */
 	panel->colorWell = WMCreateColorWell(panel->win);
