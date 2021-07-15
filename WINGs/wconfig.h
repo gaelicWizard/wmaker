@@ -22,6 +22,14 @@
 
 #include "../config.h"
 
+#ifndef GSUSER_DIR
+#define GSUSER_DIR "~/GNUstep"
+#endif
+
+#ifndef DEFAULTS_SUBDIR
+#define DEFAULTS_SUBDIR "Defaults"
+#endif
+
 #if defined(HAVE_LIBINTL_H) && defined(I18N)
 # include <libintl.h>
 # define _(text) dgettext("WINGs", text)
