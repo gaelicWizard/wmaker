@@ -80,6 +80,21 @@ const char *wusergnusteppath()
 	return path;
 }
 
+const char *wuserlibrarypath()
+{
+	static char *path = NULL;
+	char *libpath;
+
+	if (path)
+		/* Value have been already computed, re-use it */
+		return path;
+
+	if (!path)
+		path = wstrappend(wexpandpath(wusergnusteppath()), "/Library");
+
+	return path;
+}
+
 char *wdefaultspathfordomain(const char *domain)
 {
 	char *path;
