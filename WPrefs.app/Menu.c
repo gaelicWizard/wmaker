@@ -1511,7 +1511,7 @@ static void showData(_Panel * panel)
 		if (access(path, F_OK) < 0) {
 			char *old_path = path;
 
-			path = wfindfile(DEF_CONFIG_PATHS, path);
+			path = wfindfile(DEF_DATA_PATHS, path);
 			wfree(old_path);
 		}
 
