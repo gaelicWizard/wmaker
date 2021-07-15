@@ -144,3 +144,5 @@ WindowMaker/IconSets/Default.iconset
 /wmlib/wmlib.pc
 BUILD_INSTALL_ROOT
 *.orig
+/WINGs/WINGs/WINGsP.h
+/wrlib/wraster.h
