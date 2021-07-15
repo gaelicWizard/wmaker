@@ -143,3 +143,4 @@ WindowMaker/IconSets/Default.iconset
 /WindowMaker/appearance.menu.nl
 /wmlib/wmlib.pc
 BUILD_INSTALL_ROOT
+*.orig
