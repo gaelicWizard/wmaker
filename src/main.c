@@ -511,7 +511,7 @@ static void execInitScript(void)
 	char *file, *paths;
 
 	paths = wstrconcat(wuserdatapath(), "/"PACKAGE);
-	paths = wstrappend(paths, ":" DEF_CONFIG_PATHS);
+	paths = wstrappend(paths, ":" DEF_DATA_PATHS);
 
 	file = wfindfile(paths, DEF_INIT_SCRIPT);
 	wfree(paths);
@@ -529,7 +529,7 @@ void ExecExitScript(void)
 	char *file, *paths;
 
 	paths = wstrconcat(wuserdatapath(), "/"PACKAGE);
-	paths = wstrappend(paths, ":" DEF_CONFIG_PATHS);
+	paths = wstrappend(paths, ":" DEF_DATA_PATHS);
 
 	file = wfindfile(paths, DEF_EXIT_SCRIPT);
 	wfree(paths);
