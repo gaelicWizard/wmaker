@@ -106,6 +106,8 @@ char *wexpandpath(const char *path)
 
 	memset(buffer, 0, PATH_MAX + 2);
 
+puts(path);
+
 	if (*path == '~') {
 		const char *home;
 
@@ -202,6 +204,7 @@ char *wexpandpath(const char *path)
 	if (*path!=0)
 		goto error;
 
+puts(buffer);
 	return wstrdup(buffer);
 
 error:
