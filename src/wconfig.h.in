@@ -141,7 +141,7 @@
 		"\""DEF_DATA_PATH"/Pixmaps\","       \
 		"\""DEF_DATA_PATH"/Backgrounds\","   \
 		"\""DEF_DATA_PATH"/CachedPixmaps\"," \
-		"\"~/pixmaps\","                                   \
+		"\"~/"PIXMAP_SUBDIR"\","                                   \
 		"\""PKGDATADIR"/Pixmaps\","                        \
 		"\""PKGDATADIR"/Backgrounds\","                    \
 		"\""PIXMAPDIR"\""                                  \
@@ -159,7 +159,7 @@
 		"\"~/"GSUSER_SUBDIR""USERDATA_SUBDIR"/Icons\","                     \
 		"\""DEF_DATA_PATH"/Pixmaps\","       \
 		"\""DEF_DATA_PATH"/CachedPixmaps\"," \
-		"\"~/pixmaps\","                                   \
+		"\"~/"PIXMAP_SUBDIR"\","                                   \
 		"\""PKGDATADIR"/Icons\","                          \
 		"\""PKGDATADIR"/Pixmaps\","                        \
 		"\""PIXMAPDIR"\""                                  \
