@@ -1748,7 +1748,7 @@ int wmkdirhier(const char *path)
 		return 0;
 	}
 
-	/* Only create directories under $WMAKER_USER_ROOT/Defaults or $WMAKER_USER_ROOT/Library */
+	/* Only create directories under $GNUSTEP_USER_DEFAULTS_DIR or $GNUSTEP_USER_LIBRARY */
 	if ((( libpath = wuserdatapath()) == NULL) ||
 		((udefpath = wdefaultspathfordomain("")) == NULL))
 		return 0;
@@ -1841,7 +1841,7 @@ int wrmdirhier(const char *path)
 	struct stat st;
 	int error;
 
-	/* Only remove directories under $WMAKER_USER_ROOT/Defaults or $WMAKER_USER_ROOT/Library */
+	/* Only remove directories under $GNUSTEP_USER_DEFAULTS_DIR or $GNUSTEP_USER_LIBRARY */
 	if ((( libpath = wuserdatapath()) == NULL) ||
 		((udefpath = wdefaultspathfordomain("")) == NULL))
 		return EPERM;
