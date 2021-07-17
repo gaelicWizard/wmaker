@@ -44,9 +44,9 @@ int main(int argc, char *argv[])
 	char *tmp, *theme_paths, *style_paths, *icon_paths;
 
 	tmp = wstrconcat("-noext ", PKGDATADIR);
-	theme_paths = wstrconcat(tmp, "/Themes $HOME/GNUstep/"DEF_DATA_SUBDIR"/Themes WITH setstyle");
-	style_paths = wstrconcat(tmp, "/Styles $HOME/GNUstep/"DEF_DATA_SUBDIR"/Styles WITH setstyle");
-	icon_paths = wstrconcat(tmp, "/IconSets $HOME/GNUstep/"DEF_DATA_SUBDIR"/IconSets WITH seticons");
+	theme_paths = wstrconcat(tmp, "/Themes $HOME/"DEF_DATA_DIR"/Themes WITH setstyle");
+	style_paths = wstrconcat(tmp, "/Styles $HOME/"DEF_DATA_DIR"/Styles WITH setstyle");
+	icon_paths = wstrconcat(tmp, "/IconSets $HOME/"DEF_DATA_DIR"/IconSets WITH seticons");
 
 	struct option longopts[] = {
 		{ "version",		no_argument,	NULL,	'v' },
@@ -245,7 +245,7 @@ int main(int argc, char *argv[])
 	L3Menu = WMCreatePLArray(
 		WMCreatePLString(_("Images")),
 		WMCreatePLString("OPEN_MENU"),
-		WMCreatePLString("-noext $HOME/GNUstep/"DEF_DATA_SUBDIR"/Backgrounds WITH wmsetbg -u -t"),
+		WMCreatePLString("-noext $HOME/"DEF_DATA_DIR"/Backgrounds WITH wmsetbg -u -t"),
 		NULL
 	);
 	WMAddToPLArray(L2Menu, L3Menu);
@@ -265,7 +265,7 @@ int main(int argc, char *argv[])
 	L2Menu = WMCreatePLArray(
 		WMCreatePLString(_("Save IconSet")),
 		WMCreatePLString("SHEXEC"),
-		WMCreatePLString("geticonset $HOME/GNUstep/"DEF_DATA_SUBDIR"/IconSets/"
+		WMCreatePLString("geticonset $HOME/"DEF_DATA_DIR"/IconSets/"
 			"\"%a(IconSet name,Name to save icon set as)\""),
 		NULL
 	);
@@ -503,7 +503,7 @@ noreturn void print_help(int print_usage, int exitval)
 {
 	printf("Usage: %s [-h] [-v]\n", prog_name);
 	if (print_usage) {
-		puts("Writes a menu structure usable as ~/GNUstep/Defaults/WMRootMenu to stdout");
+		puts("Writes a menu structure usable as "GSUSER_SUBDIR""DEFAULTS_SUBDIR"/WMRootMenu to stdout");
 		puts("");
 		puts("  -h, --help           display this help and exit");
 		puts("  -v, --version        output version information and exit");

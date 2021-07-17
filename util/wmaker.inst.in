@@ -61,14 +61,12 @@ copy() {
 	rm -f "$target"
 	if [ "$file" = "WindowMaker" ]; then
 		sed -e "s|~/GNUstep/Defaults|$USERDEFDIR|g" "$source" | \
-		sed -e "s|~/GNUstep/Library|$USERLIBDIR|g" "$source" \
-		> "$target"
+		sed -e "s|~/GNUstep/Library|$USERLIBDIR|g" "$source" | \
+			> "$target"
 	else
-		if test "x$WMAKER_USER_ROOT" != "x"; then
-			sed -e "s|\$HOME/GNUstep/Defaults|$USERDEFDIR|g" | \
-			sed -e "s|\$HOME/GNUstep/Library|$USERLIBDIR|g" | \
-					"$source" > "$target"
-		fi
+		sed -e "s|\$HOME/GNUstep/Defaults|$USERDEFDIR|g" "$source" | \
+		sed -e "s|\$HOME/GNUstep/Library|$USERLIBDIR|g" "$source" | \
+			> "$target"
 	fi
 }
 
@@ -104,20 +102,11 @@ if type -p gnustep-config >/dev/null; then
 	echo "Using GNUstep user directories"
 	USERDEFDIR="$USERDIR/$(gnustep-config --variable=GNUSTEP_USER_DEFAULTS_DIR)"
 	USERLIBDIR="$(gnustep-config --variable=GNUSTEP_USER_LIBRARY)"
-elif test "x$WMAKER_USER_ROOT" = "x"; then
-	cd "$USERDIR"
-	GSDIR="$USERDIR/GNUstep"
-	USERDEFDIR="$GSDIR/Defaults"
-	USERLIBDIR="$GSDIR/Library"
-	if [ ! -d "$GSDIR" ]; then
-		echo "Creating $GSDIR user directory"
-		make_dir "$GSDIR"
-	fi
 else
-	USERDEFDIR="$WMAKER_USER_ROOT/Defaults"
-	USERLIBDIR="$WMAKER_USER_ROOT/Library"
-	GSDIR="$WMAKER_USER_ROOT"
-	if [ ! -d "$GSDIR" ]; then
+	GSDIR="${WMAKER_USER_ROOT:-$USERDIR/GNUstep}"
+	USERDEFDIR="${XDG_CONFIG_HOME:-$GSDIR/Defaults}"
+	USERLIBDIR="${XDG_DATA_HOME:-$GSDIR/Library}"
+	if [ ! -d "$USERDEFDIR" ] && [ ! -d "$USERLIBDIR" ] && [ ! -d "$GSDIR" ]; then
 		# in this case, and in this case only, mkdir needs -p option
 		mkdir -p "$GSDIR" || {
 		    echo "Directory specified in WMAKER_USER_ROOT environment variable does not exist and could not be created"
@@ -162,7 +151,7 @@ for i in $FILES; do
 	fi
 done
 
-	GenerateMenu
+GenerateMenu
 
 if [ ! -d "$USERLIBDIR/Icons/" ]; then
       echo "Creating icon library directory $USERLIBDIR/Icons"

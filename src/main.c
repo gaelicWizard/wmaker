@@ -510,7 +510,7 @@ static void execInitScript(void)
 {
 	char *file, *paths;
 
-	paths = wstrconcat(wusergnusteppath(), "/"DEF_DATA_SUBDIR);
+	paths = wstrconcat(wuserdatapath(), "/"PACKAGE);
 	paths = wstrappend(paths, ":" DEF_DATA_PATHS);
 
 	file = wfindfile(paths, DEF_INIT_SCRIPT);
@@ -528,7 +528,7 @@ void ExecExitScript(void)
 {
 	char *file, *paths;
 
-	paths = wstrconcat(wusergnusteppath(), "/"DEF_DATA_SUBDIR);
+	paths = wstrconcat(wuserdatapath(), "/"PACKAGE);
 	paths = wstrappend(paths, ":" DEF_DATA_PATHS);
 
 	file = wfindfile(paths, DEF_EXIT_SCRIPT);
