@@ -137,7 +137,7 @@ static noreturn void print_help(int print_usage, int exitval)
 {
 	printf("Usage: %s [-t] [-p] [-h] [-v] [file]\n", prog_name);
 	if (print_usage) {
-		puts("Retrieves style/theme configuration and outputs to ~/GNUstep/Library/WindowMaker/Themes/file.themed/style or to stdout");
+		puts("Retrieves style/theme configuration and outputs to "DEF_DATA_PATH"/Themes/file.themed/style or to stdout");
 		puts("");
 		puts("  -h, --help           display this help and exit");
 		puts("  -v, --version        output version information and exit");
