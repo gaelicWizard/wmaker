@@ -1732,7 +1732,7 @@ Bool WMWritePropListToFile(WMPropList * plist, const char *path)
  * file, and the last component is stripped off. the rest is the
  * the hierarchy to be created.
  *
- * refuses to create anything outside $WMAKER_USER_ROOT/Defaults or $WMAKER_USER_ROOT/Library
+ * refuses to create anything outside $GNUSTEP_USER_DEFAULTS_DIR or $GNUSTEP_USER_LIBRARY
  *
  * returns 1 on success, 0 on failure
  */
@@ -1748,7 +1748,7 @@ int wmkdirhier(const char *path)
 	if (!udefpath)
 		udefpath = wdefaultspathfordomain("");
 
-	/* Only create directories under $WMAKER_USER_ROOT/Defaults or $WMAKER_USER_ROOT/Library */
+	/* Only create directories under $GNUSTEP_USER_DEFAULTS_DIR or $GNUSTEP_USER_LIBRARY */
 	if (( libpath == NULL) ||
 		(udefpath == NULL))
 		return 0;
@@ -1830,7 +1830,7 @@ static int wrmdirhier_fn(const char *path, const struct stat *st,
 /*
  * remove a directory hierarchy
  *
- * refuses to remove anything outside $WMAKER_USER_ROOT/Defaults or $WMAKER_USER_ROOT/Library
+ * refuses to remove anything outside $GNUSTEP_USER_DEFAULTS_DIR or $GNUSTEP_USER_LIBRARY
  *
  * returns 1 on success, 0 on failure
  *
@@ -1844,7 +1844,7 @@ int wrmdirhier(const char *path)
 	struct stat st;
 	int error;
 
-	/* Only remove directories under $WMAKER_USER_ROOT/Defaults or $WMAKER_USER_ROOT/Library */
+	/* Only remove directories under $GNUSTEP_USER_DEFAULTS_DIR or $GNUSTEP_USER_LIBRARY */
 	if ((( libpath = wuserdatapath()) == NULL) ||
 		((udefpath = wdefaultspathfordomain("")) == NULL))
 		return EPERM;

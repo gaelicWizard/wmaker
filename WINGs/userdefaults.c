@@ -49,26 +49,33 @@ static void synchronizeUserDefaults(void *foo);
 const char *wusergnusteppath()
 {
 	static char *path = NULL;
-	char *gspath;
-	int pathlen;
+	char *gspath = NULL;
 
 	if (path)
 		/* Value have been already computed, re-use it */
 		return path;
 
-	gspath = GETENV("WMAKER_USER_ROOT");
-	if (gspath) {
-		gspath = wexpandpath(gspath);
-		if (gspath) {
-			path = gspath;
+	if (gspath = GETENV("GNUSTEP_USER_ROOT"))
+		if (path = wexpandpath(gspath)) {
+			wwarning(_("variable GNUSTEP_USER_ROOT is deprecated; use GNUSTEP_USER_DEFAULTS_DIR or XDG_CONFIG_HOME"));
+puts("GNUSTEP_USER_ROOT");
+puts(path);
 			return path;
 		}
-		wwarning(_("variable WMAKER_USER_ROOT defined with invalid path, not used"));
-	}
 
-	gspath = wexpandpath(GSUSER_DIR);
-	if (gspath)
-		path = gspath;
+	if (gspath = GETENV("WMAKER_USER_ROOT"))
+		if (path = wexpandpath(gspath)) {
+			wwarning(_("variable WMAKER_USER_ROOT is deprecated; use GNUSTEP_USER_DEFAULTS_DIR or XDG_CONFIG_HOME"));
+puts("WMAKER_USER_ROOT");
+puts(path);
+			return path;
+		}
+
+	if (!path) {
+		path = wexpandpath(GSUSER_DIR);
+puts("GSUSER_DIR");
+puts(path);
+	}
 
 	return path;
 }
@@ -76,14 +83,32 @@ const char *wusergnusteppath()
 const char *wuserdatapath()
 {
 	static char *path = NULL;
-	char *libpath;
+	char *datapath = NULL;
 
 	if (path)
 		/* Value have been already computed, re-use it */
 		return path;
 
-	if (!path)
-		path = wstrappend(wexpandpath(wusergnusteppath()), "/"USERDATA_SUBDIR);
+	if (datapath = GETENV("GNUSTEP_USER_LIBRARY")) {
+		if (!(path = wexpandpath(datapath))) {
+			wwarning(_("variable GNUSTEP_USER_LIBRARY defined with invalid path, not used"));
+		}
+puts("GNUSTEP_USER_LIBRARY");
+puts(path);
+	}
+
+	if (datapath = GETENV("XDG_DATA_HOME")) {
+		if (!(path = wexpandpath(datapath))) {
+			wwarning(_("variable XDG_DATA_HOME defined defined with invalid path, not used"));
+		}
+puts("XDG_DATA_HOME");
+puts(path);
+	}
+
+	if (!path) {
+		path = wstrappend(wstrdup(wusergnusteppath()), USERDATA_SUBDIR);
+puts(path);
+	}
 
 	return path;
 }
@@ -91,18 +116,40 @@ const char *wuserdatapath()
 char *wdefaultspathfordomain(const char *domain)
 {
 	char *path;
-	const char *gspath;
-	size_t slen;
+	static char *udefpath = NULL;
 
-	gspath = wusergnusteppath();
-	slen = strlen(gspath) + strlen("/"DEFAULTS_SUBDIR) + strlen(domain) + 4;
-	path = wmalloc(slen);
+	if (!udefpath) {
+		if (path = GETENV("GNUSTEP_USER_DEFAULTS_DIR")) {
+puts("GNUSTEP_USER_DEFAULTS_DIR");
+			path = wstrappend(wexpandpath("~/"), path);
+			if (udefpath = wexpandpath(path))
+				wfree(path);
+			else
+				wwarning(_("variable GNUSTEP_USER_DEFAULTS_DIR not defined or invalid path, not used"));
+puts(udefpath);
+		}
+	} 
 
-	strcpy(path, gspath);
-	strcat(path, "/"DEFAULTS_SUBDIR);
-	strcat(path, "/");
-	strcat(path, domain);
+	if (!udefpath) {
+		if (path = GETENV("XDG_CONFIG_HOME")) {
+puts("XDG_CONFIG_HOME");
+			if (path = wexpandpath(path))
+				udefpath = path;
+			else
+				wwarning(_("variable XDG_CONFIG_HOME not defined or invalid path, not used"));
+puts(udefpath);
+		}
+	}
 
+	if (!udefpath) {
+puts(DEFAULTS_SUBDIR);
+		udefpath = wstrappend(wstrdup(wusergnusteppath()), DEFAULTS_SUBDIR);
+puts(udefpath);
+	}
+
+//puts(udefpath);
+	path = wstrappend(wstrconcat(udefpath, "/"), domain);
+puts(path);
 	return path;
 }
 
@@ -110,11 +157,9 @@ char *wdefaultspathfordomain(const char *domain)
 char *wglobaldefaultspathfordomain(const char *domain)
 {
 	char *t = NULL;
-	size_t len;
+	int result;
 
-	len = strlen(PKGCONFDIR) + strlen(domain) + 2;
-	t = wmalloc(len);
-	snprintf(t, len, "%s/%s", PKGCONFDIR, domain);
+	result = asprintf(&t, "%s/%s", PKGCONFDIR, domain);
 
 	return t;
 }
