@@ -51,7 +51,7 @@
 /**** Global varianebles ****/
 
 #define MOD_MASK wPreferences.modifier_mask
-#define CACHE_ICON_PATH "/"PACKAGE"/CachedPixmaps"
+#define CACHE_ICON_PATH PKGDATA_SUBDIR"/CachedPixmaps"
 #define ICON_BORDER 3
 
 static void miniwindowExpose(WObjDescriptor *desc, XEvent *event);

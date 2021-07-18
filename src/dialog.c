@@ -185,7 +185,7 @@ static char *HistoryFileName(const char *name)
 	filename = wstrdup(getenv("XDG_STATE_HOME"));
 	if (!filename)
 		filename = wstrconcat(wusergnusteppath(),"/.AppInfo");
-	filename = wstrappend(wexpandpath(filename), "/"PACKAGE"/History");
+	filename = wstrappend(wexpandpath(filename), PKGDATA_SUBDIR"/History");
 	if (name && strlen(name)) {
 		filename = wstrappend(filename, ".");
 		filename = wstrappend(filename, name);
