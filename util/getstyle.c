@@ -175,7 +175,7 @@ static void findCopyFile(const char *dir, const char *file)
 	wfree(fullPath);
 }
 
-#define THEME_SUBPATH "/"PACKAGE"/Themes/"
+#define THEME_DIR DEF_DATA_PATH"/Themes/"
 #define THEME_EXTDIR  ".themed/"
 
 static void makeThemePack(WMPropList * style, const char *themeName)
@@ -184,19 +184,15 @@ static void makeThemePack(WMPropList * style, const char *themeName)
 	WMPropList *key;
 	WMPropList *value;
 	int i;
-	size_t themeNameLen;
 	char *themeDir;
 	const char *user_library;
 
 	user_library = wuserdatapath();
 	if (user_library == NULL)
 		return;
-	themeNameLen = strlen(user_library) + sizeof(THEME_SUBPATH) + strlen(themeName) + sizeof(THEME_EXTDIR) + 1;
-	themeDir = wmalloc(themeNameLen);
-	snprintf(themeDir, themeNameLen,
-	         "%s" THEME_SUBPATH "%s" THEME_EXTDIR,
-	         user_library, themeName);
-	ThemePath = themeDir;
+	themeDir = wexpandpath(THEME_DIR);
+	themeDir = wstrappend(themeDir, themeName);
+	themeDir = wstrappend(themeDir, THEME_EXTDIR);
 
 	if (!wmkdirhier(themeDir)) {
 		wwarning("Could not make theme dir %s\n", themeDir);
