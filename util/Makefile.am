@@ -84,5 +84,7 @@ wmaker.inst: $(srcdir)/wmaker.inst.in ./Makefile
 		-e "s|#pkgconfdir#|$(pkgconfdir)|" \
 		-e "s|#version#|$(VERSION)|" \
 		-e "s|#bindir#|$(bindir)|" \
+		-e "s|#userdefaultsdir#|$(userdefaultsdir)|" \
+		-e "s|#userlibrarydir#|$(userlibrarydir)|" \
 			$(srcdir)/wmaker.inst.in >wmaker.inst ; \
 	chmod 755 wmaker.inst
