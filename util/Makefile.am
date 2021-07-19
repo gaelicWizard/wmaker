@@ -81,7 +81,7 @@ CLEANFILES = wmaker.inst
 
 wmaker.inst: $(srcdir)/wmaker.inst.in ./Makefile
 	$(AM_V_GEN)sed -e "s|#pkgdatadir#|$(pkgdatadir)|" \
-		-e "s|#sysconfdir#|$(sysconfdir)/WindowMaker|" \
+		-e "s|#pkgconfdir#|$(pkgconfdir)|" \
 		-e "s|#version#|$(VERSION)|" \
 		-e "s|#bindir#|$(bindir)|" \
 			$(srcdir)/wmaker.inst.in >wmaker.inst ; \
