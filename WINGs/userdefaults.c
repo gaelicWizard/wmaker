@@ -177,6 +177,7 @@ void w_save_defaults_changes(void)
 		return;
 	}
 
+	wwarning(_("Failed to call WMReleaseApplication (%s)"), WMApplication.applicationName);
 	/* save the user defaults databases */
 	synchronizeUserDefaults(NULL);
 }
