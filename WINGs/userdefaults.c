@@ -126,7 +126,7 @@ puts("GNUSTEP_USER_DEFAULTS_DIR");
 			if (udefpath = wglobpath(path))
 				wfree(path);
 			else
-				wwarning(_("variable GNUSTEP_USER_DEFAULTS_DIR not defined or invalid path, not used"));
+				wwarning(_("variable GNUSTEP_USER_DEFAULTS_DIR defined with invalid path, not used"));
 puts(udefpath);
 		}
 	} 
@@ -137,7 +137,7 @@ puts("XDG_CONFIG_HOME");
 			if (path = wglobpath(path))
 				udefpath = path;
 			else
-				wwarning(_("variable XDG_CONFIG_HOME not defined or invalid path, not used"));
+				wwarning(_("variable XDG_CONFIG_HOME defined with invalid path, not used"));
 puts(udefpath);
 		}
 	}
