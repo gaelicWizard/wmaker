@@ -222,16 +222,12 @@ char *wglobpath(const char *path)
 		case 0:
 			return wstrdup(globber.gl_pathv[globber.gl_pathc - 1]);
 			/* not reached */
-			;;
 		case GLOB_NOSPACE:
 			/* memory error */
-			;;
 		case GLOB_ABORTED:
 			/* parse error or similar */
-			;;
 		case GLOB_NOMATCH:
 			/* Pattern didn't match, but GLOB_NOCHECK not specified */
-			;;
 		default:
 			globfree(&globber);
 			;;
