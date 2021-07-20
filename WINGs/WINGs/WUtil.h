@@ -236,7 +236,7 @@ void __wmessage(const char *func, const char *file, int line, int type, const ch
 
 /* ---[ WINGs/findfile.c ]------------------------------------------------ */
 
-/* For the 4 function below, you have to free the returned string when you no longer need it */
+/* For the 5 function below, you have to free the returned string when you no longer need it */
 
 char* wfindfile(const char *paths, const char *file);
 
@@ -245,6 +245,7 @@ char* wfindfileinlist(char *const *path_list, const char *file);
 char* wfindfileinarray(WMPropList* array, const char *file);
 
 char* wexpandpath(const char *path);
+char *wglobpath(const char *path);
 
 int wcopy_file(const char *toPath, const char *srcFile, const char *destFile);
 

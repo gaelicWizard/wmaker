@@ -56,7 +56,7 @@ const char *wusergnusteppath()
 		return path;
 
 	if (gspath = GETENV("GNUSTEP_USER_ROOT"))
-		if (path = wexpandpath(gspath)) {
+		if (path = wglobpath(gspath)) {
 			wwarning(_("variable GNUSTEP_USER_ROOT is deprecated; use GNUSTEP_USER_DEFAULTS_DIR or XDG_CONFIG_HOME"));
 puts("GNUSTEP_USER_ROOT");
 puts(path);
@@ -64,7 +64,7 @@ puts(path);
 		}
 
 	if (gspath = GETENV("WMAKER_USER_ROOT"))
-		if (path = wexpandpath(gspath)) {
+		if (path = wglobpath(gspath)) {
 			wwarning(_("variable WMAKER_USER_ROOT is deprecated; use GNUSTEP_USER_DEFAULTS_DIR or XDG_CONFIG_HOME"));
 puts("WMAKER_USER_ROOT");
 puts(path);
@@ -72,7 +72,7 @@ puts(path);
 		}
 
 	if (!path) {
-		path = wexpandpath(GSUSER_DIR);
+		path = wglobpath(GSUSER_DIR);
 puts("GSUSER_DIR");
 puts(path);
 	}
@@ -90,7 +90,7 @@ const char *wuserdatapath()
 		return path;
 
 	if (datapath = GETENV("GNUSTEP_USER_LIBRARY")) {
-		if (!(path = wexpandpath(datapath))) {
+		if (!(path = wglobpath(datapath))) {
 			wwarning(_("variable GNUSTEP_USER_LIBRARY defined with invalid path, not used"));
 		}
 puts("GNUSTEP_USER_LIBRARY");
@@ -98,7 +98,7 @@ puts(path);
 	}
 
 	if (datapath = GETENV("XDG_DATA_HOME")) {
-		if (!(path = wexpandpath(datapath))) {
+		if (!(path = wglobpath(datapath))) {
 			wwarning(_("variable XDG_DATA_HOME defined defined with invalid path, not used"));
 		}
 puts("XDG_DATA_HOME");
@@ -115,14 +115,15 @@ puts(path);
 
 char *wdefaultspathfordomain(const char *domain)
 {
-	char *path;
+	char *path, *tempPath;
 	static char *udefpath = NULL;
 
 	if (!udefpath) {
 		if (path = GETENV("GNUSTEP_USER_DEFAULTS_DIR")) {
 puts("GNUSTEP_USER_DEFAULTS_DIR");
-			path = wstrappend(wexpandpath("~/"), path);
-			if (udefpath = wexpandpath(path))
+			tempPath = wglobpath("~");
+			path = wstrappend(tempPath, path);
+			if (udefpath = wglobpath(path))
 				wfree(path);
 			else
 				wwarning(_("variable GNUSTEP_USER_DEFAULTS_DIR not defined or invalid path, not used"));
@@ -133,7 +134,7 @@ puts(udefpath);
 	if (!udefpath) {
 		if (path = GETENV("XDG_CONFIG_HOME")) {
 puts("XDG_CONFIG_HOME");
-			if (path = wexpandpath(path))
+			if (path = wglobpath(path))
 				udefpath = path;
 			else
 				wwarning(_("variable XDG_CONFIG_HOME not defined or invalid path, not used"));

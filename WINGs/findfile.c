@@ -33,6 +33,7 @@
 #include <string.h>
 #include <pwd.h>
 #include <limits.h>
+#include <glob.h>
 
 #ifndef PATH_MAX
 #define PATH_MAX  1024
@@ -206,6 +207,35 @@ char *wexpandpath(const char *path)
 error:
 	errno = ENAMETOOLONG;
 	werror(_("could not expand %s"), origpath);
+
+	return NULL;
+}
+
+char *wglobpath(const char *path)
+{
+	static glob_t globber;
+
+	switch (glob(	path, 
+					GLOB_TILDE | GLOB_MARK | GLOB_APPEND, 
+					NULL, 
+					&globber)) {
+		case 0:
+			return wstrdup(globber.gl_pathv[globber.gl_pathc - 1]);
+			/* not reached */
+			;;
+		case GLOB_NOSPACE:
+			/* memory error */
+			;;
+		case GLOB_ABORTED:
+			/* parse error or similar */
+			;;
+		case GLOB_NOMATCH:
+			/* Pattern didn't match, but GLOB_NOCHECK not specified */
+			;;
+		default:
+			globfree(&globber);
+			;;
+	}
 
 	return NULL;
 }
