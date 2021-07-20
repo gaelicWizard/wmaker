@@ -149,7 +149,7 @@ puts(udefpath);
 	}
 
 //puts(udefpath);
-	path = wstrappend(wstrconcat(udefpath, "/"), domain);
+	path = wstrconcat(udefpath, domain);
 puts(path);
 	return path;
 }
