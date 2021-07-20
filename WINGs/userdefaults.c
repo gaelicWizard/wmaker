@@ -107,6 +107,7 @@ puts(path);
 
 	if (!path) {
 		path = wstrappend(wstrdup(wusergnusteppath()), USERDATA_SUBDIR);
+puts("Falling back to wusergnusteppath() as no configuration provided.");
 puts(path);
 	}
 
@@ -115,14 +116,13 @@ puts(path);
 
 char *wdefaultspathfordomain(const char *domain)
 {
-	char *path, *tempPath;
+	char *path;
 	static char *udefpath = NULL;
 
 	if (!udefpath) {
 		if (path = GETENV("GNUSTEP_USER_DEFAULTS_DIR")) {
 puts("GNUSTEP_USER_DEFAULTS_DIR");
-			tempPath = wglobpath("~");
-			path = wstrappend(tempPath, path);
+			path = wstrappend(wglobpath("~"), path);
 			if (udefpath = wglobpath(path))
 				wfree(path);
 			else
