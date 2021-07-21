@@ -25,19 +25,19 @@ config-paths.h: Makefile
 	@echo '#define PKGCONFDIR "$(pkgconfdir)"' >> $@
 	@echo '' >> $@
 	@echo '/* where the user data root is located */' >> $@
-	@echo '#define GSUSER_DIR "~/GNUstep"' >> $@
+	@echo '#define GSUSER_DIR "~/Library"' >> $@
 	@echo '' >> $@
 	@echo '/* where the user defaults are stored */' >> $@
-	@echo '#define DEFAULTS_SUBDIR "/Defaults"' >> $@
+	@echo '#define DEFAULTS_SUBDIR "/Preferences"' >> $@
 	@echo '' >> $@
 	@echo '/* where the user data are stored */' >> $@
-	@echo '#define USERDATA_SUBDIR "/Library"' >> $@
+	@echo '#define USERDATA_SUBDIR "/"' >> $@
 	@echo '' >> $@
 	@echo '/* where the user package data are stored */' >> $@
-	@echo '#define PKGDATA_SUBDIR "/$(PACKAGE_TARNAME)"' >> $@
+	@echo '#define PKGDATA_SUBDIR "/Application Support/$(PACKAGE_TARNAME)"' >> $@
 	@echo '' >> $@
 	@echo '/* where the user pixmap data are stored */' >> $@
-	@echo '#define PIXMAP_SUBDIR "/pixmaps"' >> $@
+	@echo '#define PIXMAP_SUBDIR "/Images"' >> $@
 
 ACLOCAL_AMFLAGS = -I m4
 
