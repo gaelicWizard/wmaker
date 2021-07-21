@@ -524,13 +524,13 @@ static void createPanel(_Panel * p)
 		data = putNewItem(panel, pad, DirectoryInfo, _("Bg Images (scale)"));
 		data->param.directory.command = "wmsetbg -u -s";
 		data->param.directory.directory =
-		    "/opt/kde2/share/wallpapers /usr/share/WindowMaker/Backgrounds "PKGDATADIR"/Backgrounds "DEF_DATA_PATH"/Backgrounds";
+		    WALLPAPERDIR" /usr/share/WindowMaker/Backgrounds "PKGDATADIR"/Backgrounds "DEF_DATA_PATH"/Backgrounds";
 		data->param.directory.stripExt = 1;
 
 		data = putNewItem(panel, pad, DirectoryInfo, _("Bg Images (tile)"));
 		data->param.directory.command = "wmsetbg -u -t";
 		data->param.directory.directory =
-		    "/opt/kde2/share/wallpapers /usr/share/WindowMaker/Backgrounds "PKGDATADIR"/Backgrounds "DEF_DATA_PATH"/Backgrounds";
+		    WALLPAPERDIR" /usr/share/WindowMaker/Backgrounds "PKGDATADIR"/Backgrounds "DEF_DATA_PATH"/Backgrounds";
 		data->param.directory.stripExt = 1;
 
 		smenu = putNewSubmenu(pad, _("Assorted XTerms"));
