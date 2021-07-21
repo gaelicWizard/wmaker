@@ -37,7 +37,7 @@ config-paths.h: Makefile
 	@echo '#define PKGDATA_SUBDIR "/Application Support/$(PACKAGE_TARNAME)"' >> $@
 	@echo '' >> $@
 	@echo '/* where the user pixmap data are stored */' >> $@
-	@echo '#define PIXMAP_SUBDIR "/Images"' >> $@
+	@echo '#define PIXMAP_SUBDIR "/Library/Images"' >> $@
 
 ACLOCAL_AMFLAGS = -I m4
 
