@@ -558,5 +558,6 @@ char *other_wm[MAX_WMS][2] = {
 	{ N_("Motif Window Manager"), "mwm" },
 	{ N_("FVWM"), "fvwm" },
 	{ N_("FVWM-Crystal"), "fvwm-crystal" },
+	{ N_("Quartz WM"), "quartz-wm" },
 	{ NULL, NULL }
 };
