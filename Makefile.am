@@ -16,6 +16,9 @@ config-paths.h: Makefile
 	@echo '#define LOCALEDIR "$(localedir)"' >> $@
 	@echo '' >> $@
 	@echo '/* define an extra path for pixmaps */' >> $@
+	@echo '#define WALLPAPERDIR "/opt/kde2/share/wallpapers"' >> $@
+	@echo '' >> $@
+	@echo '/* define an extra path for pixmaps */' >> $@
 	@echo '#define PIXMAPDIR "$(pixmapdir)"' >> $@
 	@echo '' >> $@
 	@echo '/* where shared data is stored */' >> $@
