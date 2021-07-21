@@ -38,6 +38,10 @@ config-paths.h: Makefile
 	@echo '' >> $@
 	@echo '/* where the user pixmap data are stored */' >> $@
 	@echo '#define PIXMAP_SUBDIR "/Library/Images"' >> $@
+	@echo '' >> $@
+	@echo '/* where the user pixmap data are stored */' >> $@
+	@echo '#define BACKGROUNDS_SUBDIR "/Library/Desktop Pictures"' >> $@
+
 
 ACLOCAL_AMFLAGS = -I m4
 
