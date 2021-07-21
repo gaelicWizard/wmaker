@@ -11,6 +11,7 @@
 #include <string.h>
 #include <strings.h>
 #include <unistd.h>
+#include <libgen.h>
 
 #include "WUtil.h"
 #include "wconfig.h"
@@ -1739,8 +1740,7 @@ Bool WMWritePropListToFile(WMPropList * plist, const char *path)
 int wmkdirhier(const char *path)
 {
 	static const char *libpath = NULL, *udefpath = NULL;
-	char *thePath = NULL, buf[1024];
-	size_t p, plen;
+	char *thePath = NULL, *tempPath = NULL;
 	struct stat st;
 
 	if (!libpath)
@@ -1758,11 +1758,9 @@ int wmkdirhier(const char *path)
 
 	thePath = wstrdup(path);
 	/* Strip the trailing component if it is a file */
-	p = strlen(thePath);
-	while (p && thePath[p] != '/')
-		thePath[p--] = '\0';
-
-	thePath[p] = '\0';
+	if ((tempPath = rindex(thePath, '/')))
+		*tempPath = '\0';
+	tempPath = NULL;
 
 	/* Shortcut if it already exists */
 	if (stat(thePath, &st) == 0) {
@@ -1777,22 +1775,21 @@ int wmkdirhier(const char *path)
 		}
 	}
 
-	memset(buf, 0, sizeof(buf));
-	p = strlen(buf);
-	plen = strlen(thePath);
+	if (!wmkdirhier(dirname_r(thePath, tempPath = wstrdup(thePath)))) {
+		wfree(tempPath);
+		wfree(thePath);
+		return 0;
+	}
+	wfree(tempPath);
 
-	do {
-		while (p++ < plen && thePath[p] != '/')
-			;
-
-		strncpy(buf, thePath, p);
-		if (mkdir(buf, 0777) == -1 && errno == EEXIST &&
-			stat(buf, &st) == 0 && !S_ISDIR(st.st_mode)) {
-			werror(_("Could not create path component %s"), buf);
-			wfree(thePath);
-			return 0;
-		}
-	} while (p < plen);
+	if (mkdir(thePath, 0777) == -1 &&
+		errno == EEXIST &&
+		stat(thePath, &st) == 0 &&
+		!S_ISDIR(st.st_mode)) {
+		werror(_("Could not create component %s"), thePath);
+		wfree(thePath);
+		return 0;
+	}
 
 	wfree(thePath);
 	return 1;
